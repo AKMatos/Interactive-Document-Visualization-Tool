@@ -23,20 +23,21 @@
         <div class="workspaceContainer">
             <div class="workspace">
                 <h2>Workspace</h2>
-                <p style="font-size: 32px" id ="text"></p>
+                <p id ="text"></p>
             </div>
             <div class="workspace">
                 <h2>Workspace</h2>
-                <p style="font-size: 32px" id ="text">Test</p>
+                <p>Test</p>
             </div>   
         </div>
     </div>
 </body>
 
 <script>
-    $.get('dataset/CIA_01', function(data) {
+    $.get('dataset/CIA_03', function(data) {
         document.getElementById("text").innerHTML = "<p>" + data + "</p>";
         console.log(data)
+        console.log(window.screen.width)
     }, 'text');
  //  ^------last argument
 </script>
