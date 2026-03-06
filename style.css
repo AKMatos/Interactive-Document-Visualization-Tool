@@ -1,0 +1,88 @@
+body {
+  background-color: #111;
+}
+h1 {
+  font-family: Courier;
+  font-size: 64px;
+  color: #0f0;
+  border: #111;
+  border-bottom: #0f0;
+  border-style: solid;
+  margin: 0px;
+}
+
+div.row {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+div.filesContainer {
+  width: 9%;
+  display: inline-block;
+  border: #111;
+  border-right: #0f0;
+  text-wrap: wrap;
+  border-style: solid;
+}
+
+div.filesContainer h2 {
+  font-family: Courier;
+  font-size: 48px;
+  color: #0f0;
+  margin: 0px;
+  border: #111;
+  border-bottom: #0f0;
+  border-style: solid;
+}
+
+div.filesContainer p {
+  font-family: Courier;
+  font-size: 32px;
+  color: #0f0;
+  margin: 0px;
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+div.workspaceContainer {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+}
+
+div.workspace {
+  display: inline-block;
+  width: 48%;
+  text-wrap: wrap;
+  float: none;
+  overflow: hidden;
+  background-color: #111;
+  margin: 0px;  
+  border: #111;
+  border-right: #0f0;
+  border-style: solid;
+}
+
+div.workspace h2 {
+  font-family: Courier;
+  font-size: 48px;
+  color: #0f0;
+  margin: 0px;
+  border: #111;
+  border-bottom: #0f0;
+  border-style: solid;
+  padding-left: 16px;
+}
+
+div.workspace p {
+  font-family: sans-serif;
+  font-size: 32px;
+  color: #fff;
+  margin: 0px;
+  margin-top: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
+}

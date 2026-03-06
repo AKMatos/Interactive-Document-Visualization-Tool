@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project 1</title>
+    <!-- <script type="module" src="fileReader.js"></script> -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Project 1 - CIS 569 - Abby and Jacob Matos</h1>
+    </header>
+    <div class="row">
+        <div class="filesContainer">
+            <h2>Files</h2>
+            <p>File 1</p>
+            <p>File 2</p>
+            <p>File 3</p>
+        </div>
+        <div class="workspaceContainer">
+            <div class="workspace">
+                <h2>Workspace</h2>
+                <p style="font-size: 32px" id ="text"></p>
+            </div>
+            <div class="workspace">
+                <h2>Workspace</h2>
+                <p style="font-size: 32px" id ="text">Test</p>
+            </div>   
+        </div>
+    </div>
+</body>
+
+<script>
+    $.get('dataset/CIA_01', function(data) {
+        document.getElementById("text").innerHTML = "<p>" + data + "</p>";
+        console.log(data)
+    }, 'text');
+ //  ^------last argument
+</script>
+
+</html>
