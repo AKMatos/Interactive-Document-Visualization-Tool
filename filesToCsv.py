@@ -1,15 +1,32 @@
+#Imports for file/folder access and pandas
 from pathlib import Path
-import sys
+from os import walk
+import pandas as pd
 
-source_dir = Path('dataset/')
+#Set source as dataset folder
+sourceDir = Path('dataset/')
 
-files = source_dir.iterdir()
+#For us, this makes a list called fileNames with the names of the files
+f = []
+for (dirpPath, dirNames, fileNames) in walk(sourceDir):
+    f.extend(fileNames)
+    break
 
-def process_files(files):
-    for file in files:
-        with file.open('r') as file_handle :
-            for line in file_handle:
-                print(line)
-                yield line
+#List for file contents
+fileContents = []
 
-process_files(files)
+#Fill above list with contents using file names to access the files
+for i in range(len(fileNames)):
+    file = open("dataset/" + fileNames[i], "r")
+    fileContents.append(file.read())
+    file.close()
+
+#Create a dataframe with these 2 lists
+df = pd.DataFrame({
+        "FileNames": fileNames,
+        "FileContents": fileContents,
+    }
+)
+
+#Export that dataframe as a csv
+df.to_csv("datasetAsCSV.csv", sep=',')
