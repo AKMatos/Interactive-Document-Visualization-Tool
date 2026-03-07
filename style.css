@@ -1,6 +1,10 @@
+/* This styles the elements of index.html page */
+
+/* ---------------------------------Base elements---------------------------------- */
 body {
   background-color: #111;
 }
+
 h1 {
   font-family: Courier;
   font-size: 2vw;
@@ -20,6 +24,11 @@ div.row {
   flex-wrap: wrap;
 }
 
+div.spacer {
+    height: .5vw;
+}
+
+/* ---------------------------------File container and subelements---------------------------------- */
 div.filesContainer {
   width: 9vw;
   display: inline-block;
@@ -54,7 +63,7 @@ div.filesContainer button {
   margin-bottom: .25vw;
 }
 
-
+/* ---------------------------------Workspace container and subelements---------------------------------- */
 div.workspaceContainer {
   width: 90vw;
   display: flex;
@@ -95,11 +104,7 @@ div.sortable-workspace p {
   padding-right: 1vw;
 }
 
-div.spacer {
-    height: .5vw;
-}
-
-
+/* ---------------------------------Sortable elements---------------------------------- */
 .sortable-list {
   list-style: none;
   padding: 0;
@@ -109,10 +114,10 @@ div.spacer {
   border-radius: 10px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
+
 .sortable-item {
   padding: 0px;
   margin: 0px;
-  /* background: rgba(255, 255, 255, 0.8); */
   border-radius: 5px;
   font-size: 1.1em;
   color: #333;
@@ -120,12 +125,13 @@ div.spacer {
   width: 8vw;
   cursor: grab;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* transition: background 0.2s, transform 0.2s; */
 }
+
 .sortable-item:hover {
   background: #222;
   transform: scale(1.03);
 }
+
 .dragging {
   opacity: 0.7;
   transform: rotate(-2deg);

@@ -1,32 +1,44 @@
+//Import d3 for csv reading
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
+//Create variables for the filesContainer and the workspaceContainer that will dynamically modified
 const list = document.getElementById("filesContainer")
-const workspaceList = document.getElementById("workspaceContainer")
+const workspaces = document.getElementById("workspaceContainer")
 
+//-------------------------------File names and workspace generation---------------------------
+//Use d3 to read the csv and do the then section on read
 d3.csv("datasetAsCSV.csv",d=>{
     return{
         fileName: String(d.FileNames),
         fileContents: String(d.FileContents),
     }
 }).then(data=>{
+    //This adds the file names to the file container
     for (let i = 0; i < data.length; i++) {
         //Generates this
-        //<div class="sortable-item" draggable="true"><button type="fileButton" onclick="fileClick()">Filename</button></div>
-        //  <button type="fileButton" onclick="fileClick()">Filename</button>
+        //<div class="sortable-item" draggable="true">
+        //  <button type="fileButton">ExampleFileName</button>
         //</div>
         let newDiv = document.createElement("div");
         newDiv.setAttribute("class", "sortable-item");
         newDiv.setAttribute("draggable", "true")
         let newButton = document.createElement("button");
         newButton.setAttribute("type", "fileButton");
+        //Sets the onclick function of the buttons/filenames
         newButton.onclick = function () {
-            let id = data[i].fileName;
             let newDivWorkspace = document.getElementById(data[i].fileName)
+            //If a workspace for a file exists, remove it and change the buttons color back to green
             if (newDivWorkspace) {
                 newDivWorkspace.remove();
                 newButton.setAttribute("style", "color: #0f0");
                 return;
+            //Else add the workspace and change the button color to red
             }
+            //Generates this
+            //<div id="CIA_01" class="sortable-workspace" draggable="true">
+            //  <h2>Workspace: ExampleFileName</h2>
+            //  <p>ExampleFileContents</p>
+            //</div>
             newDivWorkspace = document.createElement("div");
             newDivWorkspace.setAttribute("id", data[i].fileName);
             newDivWorkspace.setAttribute("class", "sortable-workspace");
@@ -40,7 +52,7 @@ d3.csv("datasetAsCSV.csv",d=>{
             newDivWorkspace.appendChild(title);
             newDivWorkspace.appendChild(bodyText);
             console.log(newDivWorkspace)
-            workspaceList.append(newDivWorkspace);
+            workspaces.append(newDivWorkspace);
             newButton.setAttribute("style", "color: #f00");
         };
         let text = document.createTextNode(data[i].fileName);
@@ -50,19 +62,24 @@ d3.csv("datasetAsCSV.csv",d=>{
     }
 });
 
+//Variable for item being dragged
 let draggingItem = null;
 
+//-------------------------------List Dragging---------------------------
+//If an item is being dragged, target it
 list.addEventListener('dragstart', (e) => {
     draggingItem = e.target;
     e.target.classList.add('dragging');
 });
 
+//When it stops being dragged, stop targeting it
 list.addEventListener('dragend', (e) => {
     e.target.classList.remove('dragging');
     document.querySelectorAll('.sortable-item').forEach(item => item.classList.remove('over'));
     draggingItem = null;
 });
 
+//Animation for dragging over an element that can be replaced
 list.addEventListener('dragover', (e) => {
     e.preventDefault();
     const draggingOverItem = getDragAfterElement(list, e.clientY);
@@ -78,6 +95,7 @@ list.addEventListener('dragover', (e) => {
     }
 });
 
+//Actual change if something is dragged onto the other
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
 
@@ -92,20 +110,24 @@ function getDragAfterElement(container, y) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-const workspaces = document.querySelector('.workspaceContainer');
+//-------------------------------List Dragging---------------------------
+//If an item is being dragged, target it
 let draggingFile = null;
 
+//When it stops being dragged, stop targeting it
 workspaces.addEventListener('dragstart', (e) => {
     draggingFile = e.target;
     e.target.classList.add('dragging');
 });
 
+//Animation for dragging over an element that can be replaced
 workspaces.addEventListener('dragend', (e) => {
     e.target.classList.remove('dragging');
     document.querySelectorAll('.sortable-workspace').forEach(item => item.classList.remove('over'));
     draggingFile= null;
 });
 
+//Animation for dragging over an element that can be replaced
 workspaces.addEventListener('dragover', (e) => {
     e.preventDefault();
     const draggingOverFile = getDragAfterWorkspace(workspaces, e.clientX);
@@ -121,6 +143,7 @@ workspaces.addEventListener('dragover', (e) => {
     }
 });
 
+//Actual change if something is dragged onto the other
 function getDragAfterWorkspace(container, x) {
     const draggableElements = [...container.querySelectorAll('.sortable-workspace:not(.dragging)')];
 
