@@ -38,13 +38,15 @@ div.filesContainer h2 {
   border-style: solid;
 }
 
-div.filesContainer p {
+div.filesContainer button {
   font-family: Courier;
   font-size: 1vw;
   color: #0f0;
   margin: 0px;
-  margin-top: .5vw;
-  margin-left: .5vw;
+  background-color: rgba(0, 0, 0, 0);
+  border-style: none;
+  text-align: left;
+  width: 7.5vw;
 }
 
 div.workspaceContainer {
@@ -53,7 +55,7 @@ div.workspaceContainer {
   flex-direction: row;
 }
 
-div.workspace {
+div.sortable-workspace {
   display: inline-block;
   width: 48%;
   text-wrap: wrap;
@@ -66,7 +68,7 @@ div.workspace {
   border-style: solid;
 }
 
-div.workspace h2 {
+div.sortable-workspace h2 {
   font-family: Courier;
   font-size: 1.5vw;
   color: #0f0;
@@ -77,7 +79,7 @@ div.workspace h2 {
   padding-left: .5vw;
 }
 
-div.workspace p {
+div.sortable-workspace p {
   font-family: sans-serif;
   font-size: 1vw;
   color: #fff;
@@ -85,4 +87,39 @@ div.workspace p {
   margin-top: 1vw;
   padding-left: 1vw;
   padding-right: 1vw;
+}
+
+div.spacer {
+  height: .5vw
+}
+
+.sortable-list {
+  list-style: none;
+  padding: 0;
+  width: 350px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+.sortable-item {
+  padding: 0px;
+  margin: 0px;
+  /* background: rgba(255, 255, 255, 0.8); */
+  border-radius: 5px;
+  font-size: 1.1em;
+  color: #333;
+  font-weight: bold;
+  width: 8vw;
+  cursor: grab;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* transition: background 0.2s, transform 0.2s; */
+}
+.sortable-item:hover {
+  background: #222;
+  transform: scale(1.03);
+}
+.dragging {
+  opacity: 0.7;
+  transform: rotate(-2deg);
 }

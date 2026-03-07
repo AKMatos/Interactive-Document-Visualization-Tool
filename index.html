@@ -16,30 +16,123 @@
     <div class="row">
         <div class="filesContainer">
             <h2>Files</h2>
-            <p>File 1</p>
-            <p>File 2</p>
-            <p>File 3</p>
+            <div class="spacer"></div>
+            <div class="sortable-item" draggable="true">
+                <button type="fileButton" onclick="fileClick()">File 1</button>
+            </div>
+            <div class="sortable-item" draggable="true">
+                <button type="fileButton" onclick="fileClick()">File 2</button>
+            </div>
+            <div class="sortable-item" draggable="true">
+                <button type="fileButton" onclick="fileClick()">File 3</button>
+            </div>
         </div>
         <div class="workspaceContainer">
-            <div class="workspace">
+            <div class="sortable-workspace" draggable="true">
                 <h2>Workspace</h2>
                 <p id ="text"></p>
             </div>
-            <div class="workspace">
+            <div class="sortable-workspace" draggable="true">
                 <h2>Workspace</h2>
                 <p>Test</p>
             </div>   
         </div>
     </div>
-</body>
 
-<script>
-    $.get('dataset/CIA_03', function(data) {
-        document.getElementById("text").innerHTML = "<p>" + data + "</p>";
-        console.log(data)
-        console.log(window.screen.width)
-    }, 'text');
- //  ^------last argument
-</script>
+    <script>
+        $.get('dataset/CIA_03', function(data) {
+            document.getElementById("text").innerHTML = "<p>" + data + "</p>";
+            console.log(data)
+            console.log(window.screen.width)
+        }, 'text');
+     //  ^------last argument
+
+        const list = document.querySelector('.filesContainer');
+        let draggingItem = null;
+
+        list.addEventListener('dragstart', (e) => {
+            draggingItem = e.target;
+            e.target.classList.add('dragging');
+        });
+
+        list.addEventListener('dragend', (e) => {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.sortable-item').forEach(item => item.classList.remove('over'));
+            draggingItem = null;
+        });
+
+        list.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const draggingOverItem = getDragAfterElement(list, e.clientY);
+
+            // Remove .over from all items
+            document.querySelectorAll('.sortable-item').forEach(item => item.classList.remove('over'));
+
+            if (draggingOverItem) {
+            draggingOverItem.classList.add('over'); // Add .over to the hovered item
+            list.insertBefore(draggingItem, draggingOverItem);
+            } else {
+            list.appendChild(draggingItem); // Append to the end if no item below
+            }
+        });
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        const workspaces = document.querySelector('.workspaceContainer');
+        let draggingFile = null;
+
+        workspaces.addEventListener('dragstart', (e) => {
+            draggingFile = e.target;
+            e.target.classList.add('dragging');
+        });
+
+        workspaces.addEventListener('dragend', (e) => {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.sortable-workspace').forEach(item => item.classList.remove('over'));
+            draggingFile= null;
+        });
+
+        workspaces.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const draggingOverFile = getDragAfterWorkspace(workspaces, e.clientX);
+
+            // Remove .over from all items
+            document.querySelectorAll('.sortable-workspace').forEach(item => item.classList.remove('over'));
+
+            if (draggingOverFile) {
+            draggingOverFile.classList.add('over'); // Add .over to the hovered item
+            workspaces.insertBefore(draggingFile, draggingOverFile);
+            } else {
+            workspaces.appendChild(draggingFile); // Append to the end if no item below
+            }
+        });
+
+        function getDragAfterWorkspace(container, x) {
+            const draggableElements = [...container.querySelectorAll('.sortable-workspace:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+    </script>
+</body>
 
 </html>
