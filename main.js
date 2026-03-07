@@ -24,6 +24,7 @@ d3.csv("datasetAsCSV.csv",d=>{
             let newDivWorkspace = document.getElementById(data[i].fileName)
             if (newDivWorkspace) {
                 newDivWorkspace.remove();
+                newButton.setAttribute("style", "color: #0f0");
                 return;
             }
             newDivWorkspace = document.createElement("div");
@@ -40,8 +41,8 @@ d3.csv("datasetAsCSV.csv",d=>{
             newDivWorkspace.appendChild(bodyText);
             console.log(newDivWorkspace)
             workspaceList.append(newDivWorkspace);
+            newButton.setAttribute("style", "color: #f00");
         };
-        //newButton.setAttribute("id", data[i].fileName);
         let text = document.createTextNode(data[i].fileName);
         newButton.appendChild(text);
         newDiv.appendChild(newButton)
