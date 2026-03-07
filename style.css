@@ -8,11 +8,12 @@ h1 {
   border: #111;
   border-bottom: #0f0;
   border-style: solid;
+  border-width: .2vw;
   margin: 0px;
 }
 
 div.row {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -20,10 +21,11 @@ div.row {
 }
 
 div.filesContainer {
-  width: 9%;
+  width: 9vw;
   display: inline-block;
   border: #111;
   border-right: #0f0;
+  border-width: .2vw;
   text-wrap: wrap;
   border-style: solid;
 }
@@ -36,26 +38,32 @@ div.filesContainer h2 {
   border: #111;
   border-bottom: #0f0;
   border-style: solid;
+  border-width: .2vw;
 }
 
-div.filesContainer p {
+div.filesContainer button {
   font-family: Courier;
   font-size: 1vw;
+  width: 8vw;
   color: #0f0;
+  text-align: left;
+  background-color: #111;
+  border-style: none;
   margin: 0px;
   margin-top: .5vw;
   margin-left: .5vw;
 }
 
+
 div.workspaceContainer {
-  width: 90%;
+  width: 90vw;
   display: flex;
   flex-direction: row;
 }
 
 div.workspace {
   display: inline-block;
-  width: 48%;
+  width: 48vw;
   text-wrap: wrap;
   float: none;
   overflow: hidden;
@@ -64,6 +72,7 @@ div.workspace {
   border: #111;
   border-right: #0f0;
   border-style: solid;
+  border-width: .2vw;
 }
 
 div.workspace h2 {
@@ -74,6 +83,7 @@ div.workspace h2 {
   border: #111;
   border-bottom: #0f0;
   border-style: solid;
+  border-width: .2vw;
   padding-left: .5vw;
 }
 
@@ -85,4 +95,8 @@ div.workspace p {
   margin-top: 1vw;
   padding-left: 1vw;
   padding-right: 1vw;
+}
+
+div.spacer {
+    height: .5vw;
 }

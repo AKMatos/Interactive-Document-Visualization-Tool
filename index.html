@@ -14,11 +14,9 @@
         <h1>Project 1 - CIS 569 - Abby and Jacob Matos</h1>
     </header>
     <div class="row">
-        <div class="filesContainer">
+        <div id="filesContainer" class="filesContainer">
             <h2>Files</h2>
-            <p>File 1</p>
-            <p>File 2</p>
-            <p>File 3</p>
+            <div class="spacer"></div>
         </div>
         <div class="workspaceContainer">
             <div class="workspace">
@@ -33,13 +31,33 @@
     </div>
 </body>
 
-<script>
-    $.get('dataset/CIA_03', function(data) {
-        document.getElementById("text").innerHTML = "<p>" + data + "</p>";
-        console.log(data)
-        console.log(window.screen.width)
-    }, 'text');
- //  ^------last argument
+<script type="module">
+    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+//     $.get('dataset/CIA_03', function(data) {
+//         document.getElementById("text").innerHTML = "<p>" + data + "</p>";
+//         console.log(data)
+//     }, 'text');
+//  //  ^------last argument
+
+    let fileContainer = document.getElementById("filesContainer")
+
+    d3.csv("datasetAsCSV.csv",d=>{
+        return{
+            fileName: String(d.FileNames),
+            fileContents: String(d.FileContents),
+        }
+    }).then(data=>{
+        console.log(data[0].fileContents)
+        for (let i = 0; i < data.length; i++) {
+            let p = document.createElement("button");
+            p.setAttribute("type", "fileButton")
+            p.setAttribute("onclick", "fileClick()")
+            let node = document.createTextNode(data[i].fileName);
+            p.appendChild(node);
+            fileContainer.append(p);
+        }
+    });
 </script>
 
 </html>
