@@ -50,6 +50,8 @@ div.filesContainer button {
   border-style: none;
   text-align: left;
   width: 7.5vw;
+  margin-top: .25vw;
+  margin-bottom: .25vw;
 }
 
 
@@ -61,7 +63,7 @@ div.workspaceContainer {
 
 div.sortable-workspace {
   display: inline-block;
-  width: 48%;
+  width: 100%;
   text-wrap: wrap;
   float: none;
   overflow: hidden;
