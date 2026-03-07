@@ -104,7 +104,7 @@ div.sortable-workspace p {
   padding-right: 1vw;
 }
 
-/* ---------------------------------Sortable elements---------------------------------- */
+/* ---------------------------------Sortable and draggable elements---------------------------------- */
 .sortable-list {
   list-style: none;
   padding: 0;

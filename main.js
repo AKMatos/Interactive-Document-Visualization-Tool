@@ -62,10 +62,10 @@ d3.csv("datasetAsCSV.csv",d=>{
     }
 });
 
+//-------------------------------List Dragging---------------------------
 //Variable for item being dragged
 let draggingItem = null;
 
-//-------------------------------List Dragging---------------------------
 //If an item is being dragged, target it
 list.addEventListener('dragstart', (e) => {
     draggingItem = e.target;
@@ -110,7 +110,7 @@ function getDragAfterElement(container, y) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-//-------------------------------List Dragging---------------------------
+//-------------------------------Workspace Dragging---------------------------
 //If an item is being dragged, target it
 let draggingFile = null;
 
