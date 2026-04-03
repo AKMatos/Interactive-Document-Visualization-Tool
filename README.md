@@ -1,2 +1,3 @@
 # Interactive-Document-Visualization-Tool
 This tool was created with HTML, CSS, python, and D3.js. It is a workspace that displays files from a dataset as a list organized by document IDs. Users can select one or more of these files to open up views of the files in the adjacent workspace. Users can reorganize the layout of opened files in the file viewing workspace. Users can reselect the files to close them. The file names can be reordered in the file list as well.
+The site also clusters files by countries mentioned in the files. If a file does not have a country mentioned it is put in a cluster called "No Country". These clusters can be moved in the list and also opened all in one workspace. 
