@@ -30,7 +30,7 @@ div.spacer {
 
 /* ---------------------------------File container and subelements---------------------------------- */
 div.filesContainer {
-  width: 9vw;
+  width: 11vw;
   display: inline-block;
   border: #111;
   border-right: #0f0;
@@ -63,9 +63,23 @@ div.filesContainer button {
   margin-bottom: .25vw;
 }
 
+div.sortable-item button {
+  font-size: 1vw !important; 
+  padding-left: .5vw;
+}
+
+
+
+/* ---------------------------------Cluster container and subelements---------------------------------- */
+div.sortable-cluster button {
+  font-family: Courier;
+  font-size: 1.25vw;
+}
+
+
 /* ---------------------------------Workspace container and subelements---------------------------------- */
 div.workspaceContainer {
-  width: 90vw;
+  width: 88vw;
   display: flex;
   flex-direction: row;
 }
@@ -84,8 +98,8 @@ div.sortable-workspace {
 }
 
 div.sortable-workspace h2 {
-  font-family: Courier;
-  font-size: 1.5vw;
+    font-family: Courier;
+    font-size: 1.5vw;
   color: #0f0;
   margin: 0px;
   border: #111;

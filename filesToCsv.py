@@ -29,4 +29,4 @@ df = pd.DataFrame({
 )
 
 #Export that dataframe as a csv
-df.to_csv("datasetAsCSV.csv", sep=',')
+df.to_csv("datasetAsCSV.csv", sep=',', index=False)
