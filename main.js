@@ -103,18 +103,7 @@ d3.csv("datasetAsCSVwithClusters.csv",d=>{
             amountPerCluster.push(currentAmount)
         }
     }
-    console.log(amountPerCluster)
-    console.log(amountSoFar)
 
-    const initialValue = 0;
-    const sumWithInitial = amountPerCluster.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        initialValue,
-    );
-    
-    console.log(sumWithInitial)
-
-console.log(sumWithInitial);
     // Generate the cluster html
     // Counts what row of data to address
     let sumOfRowsProcessed = 0
