@@ -9,23 +9,44 @@ h1 {
   font-family: Courier;
   font-size: 2vw;
   color: #0f0;
-  border: #111;
-  border-bottom: #0f0;
-  border-style: solid;
-  border-width: .2vw;
   margin: 0px;
 }
 
 div.row {
   width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 div.spacer {
-    height: .5vw;
+  height: .5vw;
+}
+
+div.horizontalLine {
+  height: .5vh;
+  border: #111;
+  border-bottom: #0f0;
+  border-style: solid;
+  border-width: .2vw;
+}
+
+/* ---------------------------------Swap Button---------------------------------- */
+button#swapButton {
+  font-family: Courier;
+  font-size: 1.5vw;
+  color: #0f0;
+  background-color: #222;
+  border: #0f0;
+  border-style: solid;
+  border-width: .2vw;
+  margin: auto;
+}
+
+/* ---------------------------------Plot container and subelements---------------------------------- */
+div.plotContainer {
+  width: 88vw;
+  display: none;
 }
 
 /* ---------------------------------File container and subelements---------------------------------- */

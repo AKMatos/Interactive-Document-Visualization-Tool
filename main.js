@@ -1,9 +1,27 @@
 //Import d3 for csv reading
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-//Create variables for the filesContainer and the workspaceContainer that will dynamically modified
+//Create variables for the filesContainer, the workspaceContainer, the plotContainer, and the swapButton that will dynamically modified
 const list = document.getElementById("filesContainer")
 const workspaces = document.getElementById("workspaceContainer")
+const plot = document.getElementById("plotContainer")
+const swapButton = document.getElementById("swapButton")
+
+//-------------------------------Swap Button---------------------------
+swapButton.onclick = function () { swapBody() };
+
+function swapBody() {
+    if (swapButton.textContent == "Swap to Plot") {
+        workspaces.style.display = 'none'
+        plot.style.display = 'flex'
+        swapButton.textContent = "Swap to Workspaces"
+    }
+    else {
+        plot.style.display = 'none'
+        workspaces.style.display = 'flex'
+        swapButton.textContent = "Swap to Plot"
+    }
+}
 
 //-------------------------------Workspace generation---------------------------
 // Generates this
@@ -135,7 +153,6 @@ d3.csv("datasetAsCSVwithClusters.csv",d=>{
         newDiv.appendChild(newButton)
         //Creates the files in the cluster
         for (let j = 0; j < amountPerCluster[i]; j++) {
-            console.log(data[amountSoFar[i]+j].fileClusters)
             createFile(newDiv, data[amountSoFar[i]+j].fileName, data[amountSoFar[i]+j].fileContents, amountSoFar[i]+j)
         }
         list.append(newDiv);
