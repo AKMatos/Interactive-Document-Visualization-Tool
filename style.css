@@ -49,6 +49,11 @@ div.plotContainer {
   display: none;
 }
 
+div.plotContainer img {
+  width: 88vw;
+  height: calc(88vw/2);
+}
+
 /* ---------------------------------File container and subelements---------------------------------- */
 div.filesContainer {
   width: 11vw;
@@ -65,10 +70,17 @@ div.filesContainer h2 {
   font-size: 1.5vw;
   color: #0f0;
   margin: 0px;
-  border: #111;
-  border-bottom: #0f0;
-  border-style: solid;
-  border-width: .2vw;
+  margin-top: .25vw;
+  margin-bottom: .25vw;
+}
+
+div.filesContainer h3 {
+  font-family: Courier;
+  font-size: .75vw;
+  color: #0f0;
+  margin: 0px;
+  margin-top: .25vw;
+  margin-bottom: .25vw;
 }
 
 div.filesContainer button {
@@ -88,8 +100,6 @@ div.sortable-item button {
   font-size: 1vw !important; 
   padding-left: .5vw;
 }
-
-
 
 /* ---------------------------------Cluster container and subelements---------------------------------- */
 div.sortable-cluster button {

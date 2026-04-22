@@ -18,7 +18,7 @@ fileContents = []
 #Fill above list with contents using file names to access the files
 for i in range(len(fileNames)):
     file = open("dataset/" + fileNames[i], "r")
-    fileContents.append(file.read())
+    fileContents.append(file.read().replace('\n', '\t').replace('\r', ''))
     file.close()
 
 #Create a dataframe with these 2 lists
