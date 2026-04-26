@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy
 import nltk
 from nltk.tree import *
 
@@ -107,3 +108,13 @@ plt.ylabel("Weighted Size of File")
 # plt.show()
 
 plt.savefig('plot.png')
+
+df_cleaned = pd.DataFrame(df_transformed, columns=["x", "y"])
+    
+df3 = pd.DataFrame(df_cleaned)
+
+df3['FileNames'] = df['FileNames'].tolist()
+
+df3 = df3.loc[:, ['FileNames', 'x', 'y']] 
+
+df3.to_csv("MDS.csv", sep=',', index=False)
