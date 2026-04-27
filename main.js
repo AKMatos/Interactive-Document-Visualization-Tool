@@ -29,11 +29,12 @@ function swapBody() {
         //  <h2>Workspace: ExampleFileName</h2>
         //  <p>ExampleFileContents</p>
         //</div>
-function toggleWorkspace(fileName, fileContent) {
+function toggleWorkspace(fileName, fileContent, helperFlag) {
     let newDiv = document.getElementById(fileName)
     //If a workspace for a file exists, remove it
-    if (newDiv) {
+    if (newDiv && !helperFlag) {
         newDiv.remove();
+        console.log("there")
         return;
     //Else add the workspace
     }
@@ -50,6 +51,23 @@ function toggleWorkspace(fileName, fileContent) {
     newDiv.appendChild(title);
     newDiv.appendChild(bodyText);
     workspaces.append(newDiv);
+    console.log("here")
+}
+
+let theData = []
+
+// Helper for clicking a point on the graph
+function toggleWorkspaceHelper(givenFileName) {
+    console.log(theData)
+    workspaces.innerHTML = "";
+    for (let i = 0; i < theData.length; i++) {
+        if (theData[i].fileName == givenFileName) {
+            console.log("here")
+            console.log(givenFileName, theData[i].fileContents)
+            toggleWorkspace(givenFileName, theData[i].fileContents, 1)
+            break
+        }
+    }
 }
 
 //-------------------------------Filename generation---------------------------
@@ -74,7 +92,7 @@ function createFile(cluster, fileName, fileContents) {
             newButton.setAttribute("style", "color: #0f0");
             toggle = 1
         }
-        toggleWorkspace(fileName, fileContents)
+        toggleWorkspace(fileName, fileContents, 0)
     };
     let text = document.createTextNode(fileName);
     newButton.appendChild(text);
@@ -103,6 +121,8 @@ d3.csv("datasetAsCSVwithClusters.csv",d=>{
     let amountSoFar = [0]
     let currentAmount = 0
     let currentCluster = data[0].fileClusters   
+
+    theData = data
     //Get amount of clusters add add to array
     for (let i = 0; i < data.length; i++) {
         // If in current cluster increment
@@ -306,15 +326,14 @@ function getDragAfterWorkspace(container, x) {
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 900 - margin.left - margin.right,
-    height = 900 - margin.top - margin.bottom;
+    width = 720 - margin.left - margin.right,
+    height = 720 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-	.attr("style", "background-color: white")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
@@ -336,6 +355,7 @@ d3.csv("MDS.csv",d=>{
         .range([ 0, width ]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x-axis")
         .call(d3.axisBottom(x));
 
     // Add Y axis
@@ -343,6 +363,7 @@ d3.csv("MDS.csv",d=>{
         .domain([-100, 2400])
         .range([ height, 0]);
     svg.append("g")
+        .attr("class", "y-axis")
         .call(d3.axisLeft(y));
 
     // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
@@ -351,10 +372,6 @@ d3.csv("MDS.csv",d=>{
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "1px")
-        .style("border-radius", "5px")
         .style("padding", "10px")
 
 
@@ -366,19 +383,25 @@ d3.csv("MDS.csv",d=>{
         .style("opacity", 1)
     }
 
+    // When the mouse passes over a point make the tooltip display the file name, x, and y. Found from the class of the point
     var mousemove = function(d) {
+        let tempX = 0
+        let tempY = 0
+        for (let i = 0; i <= data.length; i++) {
+            if ((data[i].fileName +"Point") == d.target.id) {
+                tempX = parseInt(data[i].x)
+                tempY = parseInt(data[i].y)
+                break
+            }
+        }
         tooltip
-        .html("File " + d.fileNames + ": " + d.x + ", " + d.y)
-        // .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-        // .style("top", (d3.mouse(this)[1]) + "px")
+        .html("This is file " + d.target.id.substring(0, d.target.id.length - 5) + ": x = " + tempX + ", y = " + tempY)
     }
 
-    // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
-    var mouseleave = function(d) {
-        tooltip
-        .transition()
-        .duration(200)
-        .style("opacity", 0)
+    // When the mouse pressed, open the workspace and swap to workspace view
+    var mousedown = function(d) {
+        swapBody()
+        toggleWorkspaceHelper(d.target.id.substring(0, d.target.id.length - 5))
     }
 
     // Add dots
@@ -387,29 +410,28 @@ d3.csv("MDS.csv",d=>{
         .data(data)
         .enter()
         .append("circle")
-        .attr("cx", function (d) { 
-            console.log("here")
-            return x(d.x); } )
+        .attr("id", function (d) { return d.fileName + "Point"; })
+        .attr("cx", function (d) { return x(d.x); } )
         .attr("cy", function (d) { return y(d.y); } )
         .attr("r", 7)
         .style("fill", function (d) {
             // If file name contains the "d" it is a docs file, so color it different
             let colorBlue = false
-            for (let i = 0; i <= d.fileName.length; i++) {
+            for (let i = 0; i < d.fileName.length; i++) {
                 if (d.fileName[i] == 'd') {
                     colorBlue = true
                 }
             }
             if (colorBlue) {
-                return "#69b3a2"
+                return "#0f0"
             }
             else {
-                return "#966b6b"
+                return "#080"
             }
         })
         .style("opacity", 0.65)
-        .style("stroke", "white")
+        .style("stroke", "#010")
         .on("mouseover", mouseover )
         .on("mousemove", mousemove )
-        .on("mouseleave", mouseleave )
+        .on("mousedown", mousedown )
 });

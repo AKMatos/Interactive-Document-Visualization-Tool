@@ -43,6 +43,36 @@ button#swapButton {
   margin: auto;
 }
 
+/* ---------------------------------Plot---------------------------------- */
+svg {
+  background-color: #222;
+  margin-left: 22vw;
+  margin-top: 1vw;
+  border-radius: 1vw;
+}
+
+div.tooltip {
+  background-color: #222;
+  margin-left: 22vw;
+  margin-top: 1vw;
+  border-radius: 1vw;
+  font-family: Courier;
+  font-size: 1vw;
+  color: #0f0;
+}
+
+g.x-axis {
+  color: #0f0;
+  font-family: Courier;
+  font-size: .6vw;
+}
+
+g.y-axis {
+  color: #0f0;
+  font-family: Courier;
+  font-size: .6vw;
+}
+
 /* ---------------------------------Plot container and subelements---------------------------------- */
 div.plotContainer {
   width: 88vw;
